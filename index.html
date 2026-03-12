@@ -1,123 +1,384 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohanad Madkour</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
-<style>
-body{font-family:'Segoe UI',sans-serif;background:#0f0f0f;color:white;scroll-behavior:smooth;}
-.navbar{background:#000;}
-.hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url("profile.jpg");background-size:cover;background-position:center;text-align:center;}
-.hero h1{font-size:60px;font-weight:700;}
-.hero span{color:#00df9a;}
-.section{padding:100px 0;}
-.card{background:#1a1a1a;color:white;border:none;transition:.4s;}
-.card:hover{transform:translateY(-10px) scale(1.02);}
-.skill-box{background:#1a1a1a;padding:30px;border-radius:10px;transition:.3s;}
-.skill-box:hover{background:#00df9a;color:black;transform:translateY(-5px);}
-.btn-main{background:#00df9a;border:none;color:black;padding:10px 25px;font-weight:600;}
-footer{background:#000;padding:20px;text-align:center;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohanad Mohamed Madkour | Portfolio</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
+        
+        /* Navbar Styles */
+        .navbar { transition: all 0.4s ease; padding: 15px 0; }
+        .navbar.scrolled { background-color: #212529 !important; padding: 10px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .nav-link { font-weight: 500; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 0.5px; margin: 0 10px; }
+        
+        /* Theme Toggle Button */
+        #theme-toggle { background: transparent; border: 1px solid rgba(255,255,255,0.5); color: white; transition: all 0.3s; }
+        #theme-toggle:hover { background: rgba(255,255,255,0.2); }
+        
+        /* Hero Section */
+        .hero-section { 
+            background: linear-gradient(135deg, #1a1e22 0%, #0d4296 100%); 
+            color: white; 
+            padding: 160px 0 100px; 
+            text-align: center; 
+            position: relative;
+        }
+
+        /* Animated Icon */
+        .animated-icon-container {
+            width: 160px; height: 160px; margin: 0 auto 30px auto;
+            background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.4);
+            animation: floatIcon 3s ease-in-out infinite;
+            border: 5px solid rgba(255,255,255,0.2);
+        }
+        .animated-icon { font-size: 4.5rem; color: white; }
+
+        @keyframes floatIcon {
+            0% { transform: translateY(0px); box-shadow: 0 10px 30px rgba(13, 110, 253, 0.4); }
+            50% { transform: translateY(-20px); box-shadow: 0 20px 40px rgba(13, 110, 253, 0.6); }
+            100% { transform: translateY(0px); box-shadow: 0 10px 30px rgba(13, 110, 253, 0.4); }
+        }
+        
+        /* Section Titles */
+        .section-title { margin-bottom: 50px; text-transform: uppercase; font-weight: 800; text-align: center; position: relative; }
+        .section-title::after { content: ""; display: block; width: 50px; height: 4px; background: #0d6efd; margin: 15px auto 0; border-radius: 2px; }
+        
+        /* Timeline */
+        .timeline-item { border-left: 3px solid #0d6efd; padding-left: 25px; margin-bottom: 30px; position: relative; }
+        .timeline-item::before { content: ""; position: absolute; left: -11px; top: 0; width: 19px; height: 19px; background-color: var(--bs-body-bg); border: 4px solid #0d6efd; border-radius: 50%; transition: background-color 0.3s; }
+        
+        /* Skills */
+        .badge-skill { font-size: 0.95rem; padding: 10px 15px; margin: 5px; border-radius: 30px; border: 1px solid var(--bs-border-color); transition: all 0.3s; display: inline-block; background-color: var(--bs-body-bg); color: var(--bs-body-color); }
+        .badge-skill:hover { background-color: #0d6efd; color: #fff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3); border-color: #0d6efd; }
+        .progress { height: 10px; border-radius: 5px; margin-bottom: 20px; background-color: var(--bs-secondary-bg); }
+        
+        /* Project Cards */
+        .card { border: none; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s ease; background-color: var(--bs-body-bg); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .card-img-top { height: 220px; object-fit: cover; border-bottom: 1px solid var(--bs-border-color); transition: transform 0.5s ease; }
+        .card:hover .card-img-top { transform: scale(1.05); }
+        .card-body { padding: 25px; z-index: 1; }
+        
+        /* Contact */
+        .contact-card { transition: all 0.3s ease; background-color: var(--bs-body-bg); border: 1px solid var(--bs-border-color); }
+        .contact-icon { width: 60px; height: 60px; background-color: rgba(13, 110, 253, 0.1); color: #0d6efd; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px; transition: all 0.3s; }
+        .contact-card:hover .contact-icon { background-color: #0d6efd; color: #fff; transform: rotateY(180deg); }
+        .social-links a { display: inline-block; width: 45px; height: 45px; background-color: #212529; color: #fff; border-radius: 50%; line-height: 45px; text-align: center; font-size: 20px; margin: 0 10px; transition: all 0.3s; }
+        .social-links a:hover { background-color: #0d6efd; transform: translateY(-5px); }
+
+        /* Custom Dark Mode Adjustments */
+        [data-bs-theme="dark"] body { background-color: #121212; }
+        [data-bs-theme="dark"] .bg-light { background-color: #1e1e1e !important; }
+        [data-bs-theme="dark"] .bg-white { background-color: #121212 !important; }
+        [data-bs-theme="dark"] .card { box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #2d2d2d; }
+        [data-bs-theme="dark"] .contact-card { background-color: #1e1e1e; border-color: #2d2d2d; }
+        [data-bs-theme="dark"] .timeline-item.bg-light { background-color: #1e1e1e !important; }
+        [data-bs-theme="dark"] .badge-skill { background-color: #1e1e1e; border-color: #333; }
+        [data-bs-theme="dark"] .text-secondary { color: #a0a0a0 !important; }
+        [data-bs-theme="dark"] .text-muted { color: #888 !important; }
+    </style>
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#navbarNav" tabindex="0">
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-<div class="container justify-content-center">
-<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse justify-content-center" id="nav">
-<ul class="navbar-nav text-center">
-<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-<li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-<li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-</ul>
-</div>
-</div>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container d-flex justify-content-between align-items-center">
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
 
-<section id="home" class="hero">
-<div class="container" data-aos="fade-up">
-<h1>Mohanad <span>Madkour</span></h1>
-<h3>Flutter Developer</h3>
-<p>Computer Science Student & Mobile Developer</p>
-<a href="#projects" class="btn btn-main mt-3">View My Work</a>
-</div>
-</section>
+            <button class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center" id="theme-toggle" style="width: 40px; height: 40px;">
+                <i class="bi bi-moon-fill fs-5" id="theme-icon"></i>
+            </button>
+        </div>
+    </nav>
 
-<section id="about" class="section">
-<div class="container">
-<div class="row align-items-center">
-<div class="col-md-6" data-aos="fade-right">
-<img src="profile.jpg" class="img-fluid rounded">
-</div>
-<div class="col-md-6" data-aos="fade-left">
-<h2>About Me</h2>
-<p>Junior Flutter Developer and Computer Science student with hands-on experience in mobile and web development. Completed training programs at NTI, DEPI, and Sprints.</p>
-</div>
-</div>
-</div>
-</section>
+    <header id="home" class="hero-section">
+        <div class="container">
+            <div class="animated-icon-container mx-auto" data-aos="zoom-in" data-aos-duration="1000">
+                <i class="bi bi-phone text-white animated-icon"></i>
+            </div>
+            
+            <h1 class="display-4 fw-bold" data-aos="fade-up" data-aos-delay="200">Mohanad Mohamed Madkour</h1>
+            <h3 class="fw-light mb-4 text-info" data-aos="fade-up" data-aos-delay="400">Mobile Developer | Computer Science Student</h3>
+            <p class="lead text-light opacity-75 mx-auto" style="max-width: 600px;" data-aos="fade-up" data-aos-delay="600">Building seamless digital experiences through modern Mobile & Web technologies.</p>
+            <a href="#projects" class="btn btn-primary btn-lg mt-4 px-5 py-3 rounded-pill fw-bold shadow" data-aos="fade-up" data-aos-delay="800">View My Work <i class="bi bi-arrow-right ms-2"></i></a>
+        </div>
+    </header>
 
-<section id="skills" class="section bg-dark">
-<div class="container text-center">
-<h2 data-aos="fade-up">Skills</h2>
-<div class="row mt-5">
-<div class="col-md-3" data-aos="zoom-in"><div class="skill-box"><h5>Dart</h5></div></div>
-<div class="col-md-3" data-aos="zoom-in"><div class="skill-box"><h5>C#</h5></div></div>
-<div class="col-md-3" data-aos="zoom-in"><div class="skill-box"><h5>HTML / CSS</h5></div></div>
-<div class="col-md-3" data-aos="zoom-in"><div class="skill-box"><h5>Bootstrap</h5></div></div>
-</div>
-</div>
-</section>
+    <section id="about" class="py-5 mt-4">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title">Profile</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-9 text-center text-secondary">
+                    <p class="fs-5 lh-lg">Junior Flutter Developer and Computer Science student with hands-on experience in mobile and web development. I have successfully completed intensive training programs at <strong>NTI</strong>, <strong>DEPI</strong>, and <strong>Sprints</strong>, equipping me with a solid foundation in software engineering principles, UI/UX implementation, and robust backend integrations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="projects" class="section">
-<div class="container">
-<h2 class="text-center" data-aos="fade-up">Projects</h2>
-<div class="row mt-5 g-4">
-<div class="col-md-4" data-aos="fade-up">
-<div class="card"><div class="card-body">
-<h5>Gym Management System</h5>
-<p>C# and SQL desktop application</p>
-</div></div></div>
+    <section id="resume" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Education & Training</h2>
+            <div class="row mt-5">
+                <div class="col-md-6 mb-5" data-aos="fade-right">
+                    <h4 class="mb-4 text-primary fw-bold"><i class="bi bi-mortarboard-fill me-2"></i> Education</h4>
+                    <div class="timeline-item bg-light p-4 rounded-3 shadow-sm border-0">
+                        <h5 class="fw-bold">Bachelor of Computer Science</h5>
+                        <h6 class="text-primary mb-3">El Shorouk Academy</h6>
+                        <p class="text-secondary mb-2"><i class="bi bi-calendar3 me-2"></i> Expected Graduation: 2027</p>
+                        <p class="text-muted small mb-0">Focusing on Object-Oriented Programming, Data Structures, Algorithms, Database Design, and Computer Graphics.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5" data-aos="fade-left">
+                    <h4 class="mb-4 text-primary fw-bold"><i class="bi bi-award-fill me-2"></i> Training & Courses</h4>
+                    
+                    <div class="timeline-item">
+                        <h5 class="fw-bold">Cross Platform Mobile App Development</h5>
+                        <h6 class="text-muted">Digital Egypt Pioneers Initiative (DEPI)</h6>
+                        <span class="badge bg-primary rounded-pill mt-2">Present</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h5 class="fw-bold">Mobile Development Trainee (Flutter)</h5>
+                        <h6 class="text-muted">Sprints</h6>
+                        <span class="badge bg-secondary rounded-pill mt-2">Oct 2025</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h5 class="fw-bold">Web Designer - Summer Training</h5>
+                        <h6 class="text-muted">National Telecommunication Institute (NTI) & ITIDA</h6>
+                        <span class="badge bg-secondary rounded-pill mt-2">Aug 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="col-md-4" data-aos="fade-up">
-<div class="card"><div class="card-body">
-<h5>Bakery Website</h5>
-<p>HTML, CSS responsive website</p>
-<a href="https://mohanad-madkour.github.io/bakery" class="btn btn-main">View</a>
-</div></div></div>
+    <section id="skills" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Technical Expertise</h2>
+            <div class="row align-items-center">
+                
+                <div class="col-lg-6 mb-4" data-aos="fade-right">
+                    <h4 class="mb-4 text-secondary">Core Technologies</h4>
+                    
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold"><i class="bi bi-phone"></i> Dart & Flutter</span>
+                        </div>
+                        <div class="progress mt-2">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 85%;"></div>
+                        </div>
+                    </div>
 
-<div class="col-md-4" data-aos="fade-up">
-<div class="card"><div class="card-body">
-<h5>OmniaStore</h5>
-<p>E-commerce website</p>
-<a href="https://mohanad-madkour.github.io/OmniaStore/" class="btn btn-main">View</a>
-</div></div></div>
-</div>
-</div>
-</section>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold"><i class="bi bi-braces"></i> C# & SQL Server</span>
+                        </div>
+                        <div class="progress mt-2">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%;"></div>
+                        </div>
+                    </div>
 
-<section id="contact" class="section bg-dark">
-<div class="container text-center" data-aos="fade-up">
-<h2>Contact</h2>
-<p>Email: mohanadmadkour869@gmail.com</p>
-<p>Phone: 01014014159</p>
-<p>
-<a href="https://github.com/mohanad-madkour">GitHub</a> |
-<a href="https://www.linkedin.com/in/mohanad-madkour">LinkedIn</a>
-</p>
-</div>
-</section>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold"><i class="bi bi-window"></i> HTML, CSS, Bootstrap & JS</span>
+                        </div>
+                        <div class="progress mt-2">
+                            <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                </div>
 
-<footer><p>© 2025 Mohanad Madkour</p></footer>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h4 class="mb-4 text-secondary">Concepts & Tools</h4>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge-skill"><i class="bi bi-check2-circle text-primary"></i> Object-Oriented Programming (OOP)</span>
+                        <span class="badge-skill"><i class="bi bi-check2-circle text-primary"></i> Database Design & ERD</span>
+                        <span class="badge-skill"><i class="bi bi-check2-circle text-primary"></i> Data Structures</span>
+                        <span class="badge-skill"><i class="bi bi-check2-circle text-primary"></i> Responsive UI/UX</span>
+                        <span class="badge-skill"><i class="bi bi-check2-circle text-primary"></i> Git & GitHub</span>
+                    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({duration:1000,once:true});</script>
+                    <h4 class="mb-3 mt-5 text-secondary">Soft Skills</h4>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge-skill">Problem Solving</span>
+                        <span class="badge-skill">Teamwork</span>
+                        <span class="badge-skill">Communication</span>
+                        <span class="badge-skill">Self-Learning</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Recent Projects</h2>
+            <div class="row g-4 mt-3">
+                
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" class="card-img-top" alt="Gym Management Software Dashboard">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-primary mb-2 align-self-start">C# / SQL</span>
+                            <h5 class="card-title fw-bold">Gym Management System</h5>
+                            <p class="card-text text-secondary flex-grow-1 small">A robust desktop application. Created relational database schemas for managing gym members and subscriptions, utilizing efficient SQL queries for data retrieval.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800&auto=format&fit=crop" class="card-img-top" alt="OmniaStore">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-warning text-dark mb-2 align-self-start">HTML / CSS / JS</span>
+                            <h5 class="card-title fw-bold">OmniaStore E-commerce</h5>
+                            <p class="card-text text-secondary flex-grow-1 small">Developed a dynamic e-commerce front-end website featuring user login functionality and interactive product display grids.</p>
+                            <a href="https://mohanad-madkour.github.io/OmniaStore/" target="_blank" class="btn btn-outline-primary btn-sm mt-3 w-100"><i class="bi bi-box-arrow-up-right me-2"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=800&auto=format&fit=crop" class="card-img-top" alt="Web Design Agency">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-info text-dark mb-2 align-self-start">Bootstrap 5</span>
+                            <h5 class="card-title fw-bold">Agency Web Template</h5>
+                            <p class="card-text text-secondary flex-grow-1 small">Built a fully responsive, modern web template designed specifically for a digital web design company to showcase their services.</p>
+                            <a href="https://mohanad-madkour.github.io/Final-Project/" target="_blank" class="btn btn-outline-primary btn-sm mt-3 w-100"><i class="bi bi-box-arrow-up-right me-2"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop" class="card-img-top" alt="Bakery Website">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-danger mb-2 align-self-start">HTML / CSS</span>
+                            <h5 class="card-title fw-bold">Bakery Website</h5>
+                            <p class="card-text text-secondary flex-grow-1 small">Developed a visually appealing bakery website featuring detailed menu layouts, image galleries, and a warm, inviting user interface.</p>
+                            <a href="https://mohanad-madkour.github.io/bakery" target="_blank" class="btn btn-outline-primary btn-sm mt-3 w-100"><i class="bi bi-box-arrow-up-right me-2"></i> Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5 bg-light">
+        <div class="container" data-aos="fade-up">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row justify-content-center mt-5">
+                
+                <div class="col-md-4 mb-4">
+                    <div class="text-center contact-card p-4 rounded-4 shadow-sm h-100">
+                        <div class="contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                        <h5 class="fw-bold">Location</h5>
+                        <p class="text-muted mb-0">Cairo, Egypt</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="text-center contact-card p-4 rounded-4 shadow-sm h-100">
+                        <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+                        <h5 class="fw-bold">Phone</h5>
+                        <p class="text-muted mb-0">+20 10 14014159</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="text-center contact-card p-4 rounded-4 shadow-sm h-100">
+                        <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+                        <h5 class="fw-bold">Email</h5>
+                        <a href="mailto:mohanadmadkour869@gmail.com" class="text-muted text-decoration-none">mohanadmadkour869@gmail.com</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-4">
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/mohanad-madkour" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://github.com/mohanad-madkour" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-4 border-top border-secondary">
+        <p class="mb-0 text-white-50">&copy; 2026 Mohanad Mohamed Madkour. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({ once: true, offset: 50 });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.getElementById('mainNav').classList.add('scrolled');
+            } else {
+                document.getElementById('mainNav').classList.remove('scrolled');
+            }
+        });
+
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('portfolioTheme') || 'light';
+        htmlElement.setAttribute('data-bs-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            htmlElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('portfolioTheme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.remove('bi-moon-fill');
+                themeIcon.classList.add('bi-sun-fill');
+                themeIcon.style.color = '#ffc107'; 
+            } else {
+                themeIcon.classList.remove('bi-sun-fill');
+                themeIcon.classList.add('bi-moon-fill');
+                themeIcon.style.color = 'inherit';
+            }
+        }
+    </script>
 </body>
 </html>
